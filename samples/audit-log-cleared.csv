@@ -1,0 +1,67 @@
+"Keywords","Date and Time","Source","Event ID","Task Category","Computer","Message"
+"Audit Success","10/14/2026 4:20:08 PM","Microsoft-Windows-Security-Auditing","4624","Logon","WS-LAB-01","An account was successfully logged on.
+
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-LAB-01$
+	Account Domain:		LAB
+	Logon ID:		0x3E7
+
+Logon Information:
+	Logon Type:		2
+	Restricted Admin Mode:	-
+
+New Logon:
+	Security ID:		LAB\asmith
+	Account Name:		asmith
+	Account Domain:		LAB
+	Logon ID:		0x1A2B3C
+
+Network Information:
+	Workstation Name:	WS-LAB-01
+	Source Network Address:	-
+	Source Port:		49822"
+"Audit Success","10/14/2026 4:04:31 PM","Microsoft-Windows-Eventlog","1102","Log clear","WS-LAB-01","The audit log was cleared.
+
+Subject:
+	Security ID:	LAB\admin01
+	Account Name:	admin01
+	Domain Name:	LAB
+	Logon ID:	0x2F4E1"
+"Audit Success","10/14/2026 4:04:30 PM","Microsoft-Windows-Security-Auditing","4688","Process Creation","WS-LAB-01","A new process has been created.
+
+Creator Subject:
+	Security ID:		LAB\admin01
+	Account Name:		admin01
+	Account Domain:		LAB
+	Logon ID:		0x1A2B3C
+
+Process Information:
+	New Process ID:		0x1F40
+	New Process Name:	C:\Windows\System32\wevtutil.exe
+	Token Elevation Type:	TokenElevationTypeDefault (1)
+	Creator Process ID:	0x0A10
+	Creator Process Name:	C:\Windows\System32\cmd.exe
+	Process Command Line:	wevtutil cl Security"
+"Audit Success","10/14/2026 4:01:12 PM","Microsoft-Windows-Security-Auditing","4624","Logon","WS-LAB-01","An account was successfully logged on.
+
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-LAB-01$
+	Account Domain:		LAB
+	Logon ID:		0x3E7
+
+Logon Information:
+	Logon Type:		10
+	Restricted Admin Mode:	-
+
+New Logon:
+	Security ID:		LAB\admin01
+	Account Name:		admin01
+	Account Domain:		LAB
+	Logon ID:		0x1A2B3C
+
+Network Information:
+	Workstation Name:	ADMIN-PC-01
+	Source Network Address:	10.10.1.5
+	Source Port:		49822"

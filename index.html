@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+    Privacy by design: this policy tells the browser to BLOCK every network
+    request this page could try to make (connect-src 'none'), and to load only
+    this folder's own script and stylesheet. No uploaded data can leave the page.
+  -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' file:; style-src 'self' file:; img-src data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>EventLens - Windows Security Event Log Triage Tool</title>
+  <meta name="description" content="Educational, browser-only triage of Windows Security Event Viewer CSV exports. Logs are analysed locally and never uploaded.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div>
+        <h1 class="brand">EventLens</h1>
+        <p class="subtitle">Windows Security Event Log Triage Tool</p>
+      </div>
+      <p class="header-tag"><span class="tag">Educational</span> <span class="tag">Runs 100% in your browser</span></p>
+    </div>
+  </header>
+
+  <div class="privacy-banner" role="note">
+    <div class="wrap">
+      <p><strong>Privacy:</strong> Your Windows security logs are analysed locally in your browser. Files are not uploaded or transmitted anywhere.</p>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="wrap"><p class="status status-error">This tool needs JavaScript to read your file locally in the browser. Nothing is sent anywhere; JavaScript is only used to run the analysis on your own computer.</p></div>
+  </noscript>
+
+  <main id="main" class="wrap">
+
+    <section class="intro" aria-labelledby="intro-h">
+      <h2 id="intro-h">What this tool does</h2>
+      <p>Upload a Windows Event Viewer CSV export and get a SOC-style triage report: which events deserve a closer look, <em>why</em>, what innocent explanations exist, and what an analyst would check next.</p>
+      <p class="callout">A detection is a reason to investigate, not proof that an attacker is present.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="load-h">
+      <h2 id="load-h">1. Load events</h2>
+
+      <div class="load-grid">
+        <div>
+          <label id="dropzone" class="dropzone" for="file-input">
+            <span class="dz-title">Drop a CSV file here, or choose one</span>
+            <span class="dz-sub">Windows Event Viewer / PowerShell CSV export (.csv). Max 50 MB. The file is read in your browser only.</span>
+            <input id="file-input" type="file" accept=".csv,text/csv,text/plain">
+          </label>
+        </div>
+
+        <div>
+          <h3 class="small-h">Or try Demo Data</h3>
+          <p class="muted">Fictional events made for training. Use them in order for a walk-through.</p>
+          <div id="demo-buttons" class="demo-buttons"></div>
+        </div>
+      </div>
+
+      <div id="status" class="status status-info" role="status" aria-live="polite"></div>
+      <p><button type="button" id="clear-data" class="btn btn-quiet">Clear loaded data</button></p>
+    </section>
+
+    <section class="panel" aria-labelledby="export-h">
+      <h2 id="export-h">How to get your logs</h2>
+      <ol class="steps">
+        <li>Open <strong>Windows Event Viewer</strong> (press Start, type <em>Event Viewer</em>).</li>
+        <li>Go to <strong>Windows Logs &rarr; Security</strong>.</li>
+        <li>Optionally use <strong>Filter Current Log&hellip;</strong> to pick a time range or Event IDs (for example 4624, 4625, 4720, 4726, 4728, 4732, 1102, 4688).</li>
+        <li>Choose <strong>Save Filtered Log File As&hellip;</strong> (or <strong>Save All Events As&hellip;</strong>) and pick the <strong>CSV</strong> type.</li>
+        <li>Upload that CSV here.</li>
+      </ol>
+      <div class="note">
+        <p><strong>Important:</strong> account names, IP addresses and group names live inside each event's <em>Message</em> text. Depending on your Windows version, the CSV saved from Event Viewer may only contain the list columns (date, source, Event ID, task category) <em>without</em> the Message. If your file has no Message column, this tool will tell you, and most correlation will not be possible.</p>
+        <p>The reliable alternative is to export from PowerShell (run it as Administrator), which includes the Message:</p>
+        <pre id="ps-command" tabindex="0"><code>Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4624,4625,4688,4720,4726,4728,4732,1102} -MaxEvents 5000 |
+  Select-Object TimeCreated, Id, LevelDisplayName, ProviderName, MachineName, TaskDisplayName, Message |
+  Export-Csv -Path "$env:USERPROFILE\Desktop\security-events.csv" -NoTypeInformation -Encoding UTF8</code></pre>
+        <p><button type="button" id="copy-ps" class="btn">Copy command</button> <span id="copy-msg" class="muted" role="status" aria-live="polite"></span></p>
+        <p class="muted">More detail, including 7045 and PowerShell 4104 exports, is in the README.</p>
+      </div>
+      <p class="warn-line">Only analyse logs from systems you own or are authorised to investigate.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="settings-h">
+      <h2 id="settings-h">2. Settings</h2>
+      <div class="settings-grid">
+        <div class="field">
+          <label for="fail-threshold">Failed login threshold</label>
+          <input id="fail-threshold" type="number" min="1" max="1000" step="1" inputmode="numeric" aria-describedby="settings-help">
+          <span class="hint">Default 5 failures</span>
+        </div>
+        <div class="field">
+          <label for="window-minutes">Failed login time window (minutes)</label>
+          <input id="window-minutes" type="number" min="1" max="1440" step="1" inputmode="numeric" aria-describedby="settings-help">
+          <span class="hint">Default 10 minutes</span>
+        </div>
+        <div class="field field-check">
+          <input id="window-enabled" type="checkbox" checked>
+          <label for="window-enabled">Use the time window</label>
+        </div>
+        <div class="field field-btn">
+          <button type="button" id="reset-defaults" class="btn">Reset Defaults</button>
+        </div>
+      </div>
+      <p id="settings-help" class="muted">Security thresholds vary by environment. These values are educational defaults rather than universal SOC detection rules. Changes apply instantly.</p>
+      <p id="settings-msg" class="field-error" role="status" aria-live="polite"></p>
+      <p id="time-note" class="muted"></p>
+    </section>
+
+    <section id="results" class="results" aria-labelledby="results-heading" hidden>
+      <h2 id="results-heading" tabindex="-1">3. Triage report</h2>
+      <div id="demo-banner" class="demo-banner" hidden></div>
+
+      <section class="panel" aria-labelledby="dash-h">
+        <h3 id="dash-h">Dashboard</h3>
+        <div id="tiles" class="tiles"></div>
+
+        <div class="dash-grid">
+          <section aria-labelledby="ta-h"><h4 id="ta-h">Top accounts by event count</h4><div id="top-accounts"></div></section>
+          <section aria-labelledby="tf-h"><h4 id="tf-h">Top accounts with failed logins</h4><div id="top-failed"></div></section>
+          <section aria-labelledby="ti-h"><h4 id="ti-h">Most common Event IDs</h4><div id="top-ids"></div></section>
+        </div>
+
+        <section aria-labelledby="tl-h" class="timeline-box">
+          <h4 id="tl-h">Timeline of noteworthy activity</h4>
+          <div id="timeline"></div>
+        </section>
+
+        <p class="muted">Investigation score across all findings: <strong id="score-total">0</strong>. This is an educational prioritisation aid built from the explainable points listed in each finding. It is not a probability that anything is malicious.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="filters-h">
+        <h3 id="filters-h">Filters and search</h3>
+        <p class="muted">Filters apply to the findings, the administrative summary and the event table below. The dashboard always shows the whole file.</p>
+        <div class="filters">
+          <div class="field"><label for="f-eventid">Event ID</label><select id="f-eventid"></select></div>
+          <div class="field"><label for="f-account">Account</label><select id="f-account"></select></div>
+          <div class="field"><label for="f-severity">Severity</label><select id="f-severity"></select></div>
+          <div class="field"><label for="f-ip">Source IP</label><select id="f-ip"></select></div>
+          <div class="field"><label for="f-category">Event type</label><select id="f-category"></select></div>
+          <div class="field field-wide"><label for="f-search">Search</label><input id="f-search" type="search" autocomplete="off" placeholder="Account, IP, text in the message&hellip;"></div>
+          <div class="field field-btn"><button type="button" id="f-clear" class="btn">Clear filters</button></div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="alerts-h">
+        <h3 id="alerts-h">Findings</h3>
+        <p id="alerts-count" class="muted" role="status" aria-live="polite"></p>
+        <div id="alerts"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="admin-h">
+        <h3 id="admin-h">Administrative / Privilege Activity</h3>
+        <div id="admin"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="events-heading">
+        <h3 id="events-heading" tabindex="-1">All events</h3>
+        <p id="events-count" class="muted"></p>
+        <div id="events"></div>
+      </section>
+    </section>
+
+    <section class="panel" aria-labelledby="soc-h">
+      <h2 id="soc-h">How to Think Like a SOC Analyst</h2>
+      <ol class="soc-steps">
+        <li><strong>Identify the event.</strong> What Event ID is it, and what does Windows say it means?</li>
+        <li><strong>Understand what happened.</strong> Read the message in plain English: who did what to whom.</li>
+        <li><strong>Identify the affected user or system.</strong> Which account and which computer?</li>
+        <li><strong>Determine whether the activity is expected.</strong> Is there a ticket, a change window, a known job?</li>
+        <li><strong>Look for related events.</strong> What happened just before and just after?</li>
+        <li><strong>Correlate authentication and privilege activity.</strong> Failed logons, then success, then account or group changes tell a story that no single event tells.</li>
+        <li><strong>Gather additional evidence.</strong> Endpoint tools, MFA logs, firewall logs, asking the user.</li>
+        <li><strong>Decide whether escalation is required.</strong> Close as benign, monitor, or hand to incident response.</li>
+      </ol>
+      <p class="callout">One security event rarely tells the entire story. Analysts build context by correlating multiple events.</p>
+      <p class="callout">A detection is a reason to investigate, not proof that an attacker is present.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="ref-h">
+      <h2 id="ref-h">Event ID quick reference</h2>
+      <p class="muted">A small beginner set, not the hundreds of IDs Windows can write.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption class="sr-only">Supported Windows Event IDs explained in plain English</caption>
+          <thead><tr><th scope="col">Event ID</th><th scope="col">Name</th><th scope="col">Plain English</th><th scope="col">Why analysts care</th></tr></thead>
+          <tbody id="ref-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="rules-h">
+      <h2 id="rules-h">How the rules work</h2>
+      <ul class="rules">
+        <li><strong>Repeated failed logons:</strong> at least the threshold number of 4625 events for one account (inside the time window if enabled).</li>
+        <li><strong>Failed logons followed by success:</strong> the same account has a 4624 after those failures. High, unless the success came from a different source IP than the failures, then Medium.</li>
+        <li><strong>New account granted privileges:</strong> a 4720 followed by a 4728 or 4732 for the same account. High if the group looks privileged (for example Administrators).</li>
+        <li><strong>Security log cleared:</strong> any 1102 is High.</li>
+        <li><strong>Administrative / privilege activity:</strong> a plain summary of account, group, service and log-clearing events. Unrelated users are never linked automatically.</li>
+      </ul>
+      <p class="muted">Full explanations, false positives and limitations are in the README.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><strong>Educational SOC triage tool.</strong> Findings indicate activity that may deserve investigation and do not prove malicious behaviour.</p>
+      <p>Only analyse logs from systems you own or are authorised to investigate.</p>
+      <p class="muted">No analytics, cookies, tracking or external requests. Your file is read in memory and disappears when you close or refresh this page.</p>
+    </div>
+  </footer>
+
+  <script src="sample-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

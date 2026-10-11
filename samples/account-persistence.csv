@@ -1,0 +1,92 @@
+"Keywords","Date and Time","Source","Event ID","Task Category","Computer","Message"
+"Audit Success","10/14/2026 11:51:33 PM","Microsoft-Windows-Security-Auditing","4624","Logon","WS-LAB-01","An account was successfully logged on.
+
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-LAB-01$
+	Account Domain:		LAB
+	Logon ID:		0x3E7
+
+Logon Information:
+	Logon Type:		2
+	Restricted Admin Mode:	-
+
+New Logon:
+	Security ID:		LAB\asmith
+	Account Name:		asmith
+	Account Domain:		LAB
+	Logon ID:		0x1A2B3C
+
+Network Information:
+	Workstation Name:	WS-LAB-01
+	Source Network Address:	-
+	Source Port:		49822"
+"Audit Success","10/14/2026 11:44:02 PM","Microsoft-Windows-Security-Auditing","4732","Security Group Management","WS-LAB-01","A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		LAB\admin01
+	Account Name:		admin01
+	Account Domain:		LAB
+	Logon ID:		0x2F4E1
+
+Member:
+	Security ID:		WS-LAB-01\temp-admin
+	Account Name:		-
+
+Group:
+	Security ID:		BUILTIN\Administrators
+	Group Name:		Administrators
+	Group Domain:		Builtin"
+"Audit Success","10/14/2026 11:42:15 PM","Microsoft-Windows-Security-Auditing","4720","User Account Management","WS-LAB-01","A user account was created.
+
+Subject:
+	Security ID:		LAB\admin01
+	Account Name:		admin01
+	Account Domain:		LAB
+	Logon ID:		0x2F4E1
+
+New Account:
+	Security ID:		WS-LAB-01\temp-admin
+	Account Name:		temp-admin
+	Account Domain:		WS-LAB-01
+
+Attributes:
+	SAM Account Name:	temp-admin
+	Display Name:		<value not set>"
+"Audit Success","10/14/2026 11:38:40 PM","Microsoft-Windows-Security-Auditing","4688","Process Creation","WS-LAB-01","A new process has been created.
+
+Creator Subject:
+	Security ID:		LAB\admin01
+	Account Name:		admin01
+	Account Domain:		LAB
+	Logon ID:		0x1A2B3C
+
+Process Information:
+	New Process ID:		0x1F40
+	New Process Name:	C:\Windows\System32\net.exe
+	Token Elevation Type:	TokenElevationTypeDefault (1)
+	Creator Process ID:	0x0A10
+	Creator Process Name:	C:\Windows\System32\cmd.exe
+	Process Command Line:	net user temp-admin * /add"
+"Audit Success","10/14/2026 11:30:04 PM","Microsoft-Windows-Security-Auditing","4624","Logon","WS-LAB-01","An account was successfully logged on.
+
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-LAB-01$
+	Account Domain:		LAB
+	Logon ID:		0x3E7
+
+Logon Information:
+	Logon Type:		10
+	Restricted Admin Mode:	-
+
+New Logon:
+	Security ID:		LAB\admin01
+	Account Name:		admin01
+	Account Domain:		LAB
+	Logon ID:		0x1A2B3C
+
+Network Information:
+	Workstation Name:	ADMIN-PC-01
+	Source Network Address:	10.10.1.5
+	Source Port:		49822"

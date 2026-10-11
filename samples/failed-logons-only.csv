@@ -1,0 +1,377 @@
+"Keywords","Date and Time","Source","Event ID","Task Category","Computer","Message"
+"Audit Success","10/14/2026 2:31:05 PM","Microsoft-Windows-Security-Auditing","4624","Logon","WS-LAB-01","An account was successfully logged on.
+
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-LAB-01$
+	Account Domain:		LAB
+	Logon ID:		0x3E7
+
+Logon Information:
+	Logon Type:		2
+	Restricted Admin Mode:	-
+
+New Logon:
+	Security ID:		LAB\asmith
+	Account Name:		asmith
+	Account Domain:		LAB
+	Logon ID:		0x1A2B3C
+
+Network Information:
+	Workstation Name:	WS-LAB-01
+	Source Network Address:	-
+	Source Port:		49822"
+"Audit Success","10/14/2026 2:20:12 PM","Microsoft-Windows-Security-Auditing","4624","Logon","WS-LAB-01","An account was successfully logged on.
+
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-LAB-01$
+	Account Domain:		LAB
+	Logon ID:		0x3E7
+
+Logon Information:
+	Logon Type:		2
+	Restricted Admin Mode:	-
+
+New Logon:
+	Security ID:		LAB\bjones
+	Account Name:		bjones
+	Account Domain:		LAB
+	Logon ID:		0x1A2B3C
+
+Network Information:
+	Workstation Name:	WS-LAB-02
+	Source Network Address:	-
+	Source Port:		49822"
+"Audit Failure","10/14/2026 2:06:09 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Failure","10/14/2026 2:05:44 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Failure","10/14/2026 2:05:20 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Failure","10/14/2026 2:04:58 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Failure","10/14/2026 2:04:33 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Failure","10/14/2026 2:04:11 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Failure","10/14/2026 2:03:50 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Failure","10/14/2026 2:03:24 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Failure","10/14/2026 2:03:02 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Failure","10/14/2026 2:02:41 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Failure","10/14/2026 2:02:19 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Failure","10/14/2026 2:02:03 PM","Microsoft-Windows-Security-Auditing","4625","Logon","WS-LAB-01","An account failed to log on.
+
+Subject:
+	Security ID:		NULL SID
+	Account Name:		-
+	Account Domain:		-
+	Logon ID:		0x0
+
+Logon Type:			3
+
+Account For Which Logon Failed:
+	Security ID:		NULL SID
+	Account Name:		jsmith
+	Account Domain:		LAB
+
+Failure Information:
+	Failure Reason:		Unknown user name or bad password.
+	Status:			0xC000006D
+	Sub Status:		0xC000006A
+
+Network Information:
+	Workstation Name:	LAB-KIOSK-07
+	Source Network Address:	192.168.50.77
+	Source Port:		51234"
+"Audit Success","10/14/2026 1:52:18 PM","Microsoft-Windows-Security-Auditing","4624","Logon","WS-LAB-01","An account was successfully logged on.
+
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-LAB-01$
+	Account Domain:		LAB
+	Logon ID:		0x3E7
+
+Logon Information:
+	Logon Type:		3
+	Restricted Admin Mode:	-
+
+New Logon:
+	Security ID:		LAB\jsmith
+	Account Name:		jsmith
+	Account Domain:		LAB
+	Logon ID:		0x1A2B3C
+
+Network Information:
+	Workstation Name:	WS-LAB-04
+	Source Network Address:	192.168.10.45
+	Source Port:		49822"
+"Audit Success","10/14/2026 1:40:01 PM","Microsoft-Windows-Security-Auditing","4624","Logon","WS-LAB-01","An account was successfully logged on.
+
+Subject:
+	Security ID:		SYSTEM
+	Account Name:		WS-LAB-01$
+	Account Domain:		LAB
+	Logon ID:		0x3E7
+
+Logon Information:
+	Logon Type:		2
+	Restricted Admin Mode:	-
+
+New Logon:
+	Security ID:		LAB\asmith
+	Account Name:		asmith
+	Account Domain:		LAB
+	Logon ID:		0x1A2B3C
+
+Network Information:
+	Workstation Name:	WS-LAB-01
+	Source Network Address:	-
+	Source Port:		49822"
